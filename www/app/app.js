@@ -1,95 +1,107 @@
-angular.module("eliteApp",["ionic"])
+angular.module("eliteApp", ["ionic"])
 
-	.run(function($ionicPlatform){
-		$ionicPlatform.ready(function(){
-			if(window.cordova && window.cordova.plugins.Keyboard){
-				cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-			}
-			if(window.StatusBar){
-				StatusBar.styleDefault();
-			}
-		});
+.run(function($ionicPlatform) {
+  $ionicPlatform.ready(function() {
+    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+    // for form inputs)
+    if(window.cordova && window.cordova.plugins.Keyboard) {
+      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+    }
+    if(window.StatusBar) {
+      // org.apache.cordova.statusbar required
+      StatusBar.styleDefault();
+    }
+  });
+})
 
-	})
-	.config(function($stateProvider, $urlRouterProvider){
-		$stateProvider
+.config(function($stateProvider, $urlRouterProvider) {
 
-			.state('home',{
-				abstract: true,
-				url: '/home',
-				templateUrl: 'app/home/home.html'
-			})
+  $stateProvider
 
-			.state('home.leagues',{
-				url:'/leagues',
-				views:{
-					"tab-leagues":{
-						templateUrl: 'app/home/leagues.html'
-				}
-			}
-			})
+    .state('home', {
+      abstract: true,
+      url: "/home",
+      templateUrl: "app/home/home.html"
+    })
 
-			.state('home.myteams',{
-				url:'/myteams',
-				views:{
-					'tab-myteams':{
-						templateUrl: 'app/home/myteams.html'
-					}
-				}
-			})
+    .state('home.leagues', {
+      url: "/leagues",
+      views: {
+        "tab-leagues": {
+          templateUrl: "app/home/leagues.html"
+        }
+      }
+    })
 
-			.state('app',{
-				abstract: true,
-				url:'/app',
-				templateUrl:'app/layout/menu-layout.html'
-			})
-			.state('app.teams',{
-				url:'/teams',
-				views:{
-					'main-content':{
-						templateUrl:'app/teams/teams.html'
-					}
-				}
-			})
-			.state('app.team-details',{
-				url:'/teams/:id',
-				views:{
-					'main-content':{
-						templateUrl:'app/teams/team-detail.html'
-					}
-				}
-			})
-			.state('app.game',{
-				url:'/game/:id',
-				views:{
-					'main-content':{
-						templateUrl: 'app/game/game.html'
-					}
-				}
-			})
-			.state('app.standings',{
-				url:'/standings',
-				views:{
-					'main-content':{
-						templateUrl: 'app/standings/standings.html'
-					}
-				}
-			})
-			.state('app.locations',{
-				url:'/locations',
-				views:{
-					'main-content':{
-						templateUrl: 'app/locations/locations.html'
-					}
-				}
-			})
-			.state('app.rules',{
-				url:'/rules',
-				views:{
-					'main-content':{
-						templateUrl:'app/rules/rules.html'
-					}
-				}
-			})
-		$urlRouterProvider.otherwise('/home/teams');
-	})
+    .state('home.myteams', {
+      url: "/myteams",
+      views: {
+        "tab-myteams": {
+          templateUrl: "app/home/myteams.html"
+        }
+      }
+    })
+
+    .state('app', {
+      abstract: true,
+      url: "/app",
+      templateUrl: "app/layout/menu-layout.html"
+    })
+
+    .state('app.teams', {
+      url: "/teams",
+      views: {
+        'mainContent': {
+          templateUrl: "app/teams/teams.html"
+        }
+      }
+    })
+
+    .state('app.team-detail', {
+      url: "/teams/:id",
+      views: {
+        'mainContent': {
+          templateUrl: "app/teams/team-detail.html"
+        }
+      }
+    })
+
+    .state('app.game', {
+      url: "/game/:id",
+      views: {
+        'mainContent': {
+          templateUrl: "app/game/game.html"
+        }
+      }
+    })
+
+    .state('app.standings', {
+      url: "/standings",
+      views: {
+        'mainContent': {
+          templateUrl: "app/standings/standings.html"
+        }
+      }
+    })
+
+    .state('app.locations', {
+      url: "/locations",
+      views: {
+        'mainContent': {
+          templateUrl: "app/locations/locations.html"
+        }
+      }
+    })
+
+    .state('app.rules', {
+      url: "/rules",
+      views: {
+        'mainContent': {
+          templateUrl: "app/rules/rules.html",
+        }
+      }
+    });
+
+    // if none of the above states are matched, use this as the fallback
+  $urlRouterProvider.otherwise('/app/teams');
+});
