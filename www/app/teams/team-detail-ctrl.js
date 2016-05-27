@@ -9,7 +9,7 @@
         console.log("$stateParams", $stateParams);
 
         vm.teamId = Number($stateParams.id);
-        var data = eliteApi.getLeagueData();
+       eliteApi.getLeagueData().then(function(data){
 
 
        var team = _.chain(data.teams)
@@ -39,7 +39,7 @@
         .flatten("divisionStandings")
         .find({"teamId":vm.teamId})
         .value();
-
+       });
       vm.following = false;
 
       vm.toggleFollow = function(){
