@@ -40,10 +40,17 @@
         .find({"teamId":vm.teamId})
         .value();
 
+      vm.following = false;
+
+      vm.toggleFollow = function(){
+        vm.following = !vm.following;
+      };
+
       function isTeamInGame(item){
         return item.team1Id === vm.teamId || item.team2Id === vm.teamId;
 
       }
+
 
       function getScoreDisplay(isTeam1, team1Score, team2Score){
         if(team1Score && team2Score){
