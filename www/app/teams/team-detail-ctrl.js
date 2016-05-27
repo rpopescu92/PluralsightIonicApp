@@ -1,9 +1,9 @@
 (function () {
     'use strict';
 
-    angular.module('eliteApp').controller('TeamDetailCtrl', ['$stateParams', 'eliteApi',TeamDetailCtrl]);
+    angular.module('eliteApp').controller('TeamDetailCtrl', ['$stateParams', 'eliteApi','$ionicPopup',TeamDetailCtrl]);
 
-    function TeamDetailCtrl($stateParams, eliteApi) {
+    function TeamDetailCtrl($stateParams, eliteApi,$ionicPopup) {
         var vm = this;
 
         console.log("$stateParams", $stateParams);
@@ -43,7 +43,19 @@
       vm.following = false;
 
       vm.toggleFollow = function(){
-        vm.following = !vm.following;
+        if(vm.following){
+          var confirmPopup = $ionicPopup.confirm({
+            title: 'Unfollow?',
+            template: 'Are you sure you want to unfollow?'
+          });
+          confirmPopup.then(function(res){
+            if(res){
+              vm.following = !vm.following;
+            }
+          });
+        }else{
+          vm.following = !vm.following;
+        }
       };
 
       function isTeamInGame(item){
